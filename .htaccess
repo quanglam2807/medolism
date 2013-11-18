@@ -1,0 +1,28 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteRule ^index index.php
+RewriteRule ^list list.php
+RewriteRule ^avatar avatar.php
+RewriteRule ^licenses licenses.php
+RewriteRule ^login login.php
+RewriteRule ^logout logout.php
+RewriteRule ^register register.php
+RewriteRule ^resetpass resetpass.php
+RewriteRule ^profile profile.php
+RewriteRule ^mailpass mailpass.php
+RewriteRule ^addmanga addmanga.php
+RewriteRule ^viewmanga viewmanga.php
+RewriteRule ^viewchapter viewchapter.php
+RewriteRule ^addchapter addchapter.php
+RewriteRule ^home index.php
+RewriteRule ^index index.php
+RewriteRule ^editchapter editchapter.php
+RewriteRule ^editmanga editmanga.php
+RewriteRule ^manage manage.php
+RewriteRule ^user user.php
+RewriteRule ^author author.php
+RewriteRule ^guide nhamlink
+RewriteRule ^includes nhamlink
+RewriteRule ^language nhamlink
+</IfModule>

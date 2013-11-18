@@ -1,0 +1,47 @@
+.acResults {
+	padding: 0px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	background-color: #FFF;
+	overflow: hidden;
+	border-radius: 4px;
+	z-index: 1500;
+	x-overflow: 
+}
+
+.acResults ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+    max-height: 195px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.acResults li {
+	margin: 0px;
+	padding: 3px 15px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	line-height: 18px;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+    background-color: #0088CC;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.ac_loading {
+    background-color: #FFFFFF !important;
+    background-image: url("../image/loading.gif");
+    background-position: 565px 3px;
+    background-repeat: no-repeat;
+}

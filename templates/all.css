@@ -1,0 +1,281 @@
+iframe {
+display: none;
+}
+
+#recaptcha_response_field {
+border: 1px solid #CCCCCC !important;
+}
+
+html,body{margin:0;padding:0;height: 100%;}
+
+.breadcrumb,.alert{
+margin-bottom: 10px !important;
+}
+
+
+.form-horizontal .control-group > label {
+  float: left;
+  width: 140px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.spanspecial {
+width: 660px;
+}
+
+.spanbiginfo {
+width: 660px;
+}
+
+.mangastatus {
+border-radius: 5px 5px 5px 5px; 
+padding: 8px;
+color: #FFF;
+}
+
+.mangastatus-primary {
+background-color: #0088CC;
+}
+
+.mangastatus-danger {
+background-color: #DA4F49;
+}
+
+.mangastatus-inverse {
+background-color: #414141;
+}
+
+.mangastatus-success {
+background-color: #5BB75B;
+}
+
+.mangastatus-info {
+background-color: #49AFCD;
+}
+
+
+
+.headeravatar {
+    border: 1px solid #DDDDDD;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    padding: 4px;
+	float:right;
+	clear:left;
+	margin-top: 4px;
+	width: 25px;
+	height: 25px;
+}
+
+.firsttabs {
+padding-left: 10px;
+}
+
+form .remember{margin-left:320px;}
+
+.clearfix label {
+padding-left: 10px;
+}
+
+.liense {
+padding-left: 10px;
+padding-right: 10px;
+}
+
+
+.changelang {
+float:right;
+margin-top:3px;
+}
+
+losepass {
+padding-left: 10px;
+}
+
+#wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -95px;
+width: 1000px;
+background: url("../image/wash-white-30.png") repeat scroll 0 0 transparent
+}
+
+#limitwidth {
+width: 980px;
+margin: 7px auto;
+padding-bottom: 95px;
+overflow: auto;
+} 
+
+
+	.introduce_gray {
+	background-color: #F5F5F5 !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+	}
+
+	.introduce {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 12px;
+    margin-top: 0;
+	width: 980px;
+	font-size: 110%;
+	border-radius: 5px;
+	padding-top: 10px;
+	   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  -ms-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  -o-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+   box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}	
+	.footer_info {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 6px solid #0066A6;
+    float: left;
+    margin-top: -104px;
+	width: 100%;
+	font-size: 110%;
+	clear:both;
+	position: relative;
+}
+	
+	#headerlogo, #search_box {
+	float: left;
+}
+		
+	#head_search {
+	margin: 0 0 0 20px;
+	padding: 265px 0 0 0;
+	width: 550px;
+	height: 68px;
+}
+
+	.search_inside {
+	display: block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 550px;
+	height: 40px;
+}
+
+	#search_box {
+	position: relative;
+	z-index: 3;
+}
+
+	#search_icon {
+	position: absolute;
+	top: 11px;
+	left: 12px;
+	width: 18px;
+	height: 18px;
+	background: transparent url(../image/search_icon.png) no-repeat;
+	z-index: 2;
+}
+
+	#topmenu_search_query {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 10px 10px 10px 38px;
+	width: 550px;
+	font-size: 14px;
+	font-weight: bold;
+    color: #2C769F;
+	border: 1px solid #559DBC;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.85) ;
+}
+
+	#topmenu_search_query:focus, #hdr-ipsearch:active {
+    background-color: #FFF !important;
+    background-image: none;
+    border: 1px solid #0D6092;
+    color: #2C769F;
+}
+
+
+	
+	#big_nav {
+    background-color: #2E7CA4;
+	background-image: url("../image/btmy8vps.jpg");
+    border-radius: 8px;
+    height: 350px;
+	width: 980px;
+	marign: 10pt auto;
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 5px;
+	margin: 10px auto;
+}	
+
+	#headerlogo {
+    background: url("../image/logo.png") no-repeat scroll transparent;
+    height: 104px;
+    margin: 0 20px;
+    padding: 0;
+    text-indent: -9999px;
+    width: 300px;
+}
+		
+	html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin:                     0;
+    padding:                0;
+    outline:                0;
+    font-size:              100%;
+    background:             transparent;
+}
+
+* {
+	outline:none !important;
+	margin: 0;
+	padding: 0;
+	  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+	  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+	/* make transparent link selection, adjust last value opacity 0 to 1.0 */
+	  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+	  /*-webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+
+::selection, ::-moz-selection {
+	/*background: #F8F7B0*/;
+}		
+		
+	html {
+    font-size:              50%;
+    
+    /* Force scrollbar */
+    height:                 100%;
+    padding:                0 0 1px 0; 
+	margin:0;
+	padding:0;
+	/*font-family: Arial,Helvetica, Verdana,sans-serif !important*/;
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif  !important;
+	font-size: 11px !important;
+	background: #C0DEED url(../image/bg.png) repeat-x;
+	background-position: left 40px;
+	color: #333;
+	/*line-height: 1.5em;*/
+		}	
+			
+	#nav {
+    background-color: #FFFFFF;
+    border-top: 6px solid #0066A6;
+    height: 45px;
+	box-shadow:1px 1px 2px rgba(0,0,0,0.2);
+	-moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}	
+
