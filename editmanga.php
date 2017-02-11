@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 require_once('includes/config.php');
@@ -16,8 +16,8 @@ include_once('templates/redirect.php');
 }
 else {
 $id = $_GET['id'];
-$sql = @mysql_query("SELECT * FROM manga WHERE id='{$id}'");
-$row = @mysql_fetch_array($sql);
+$sql = @mysqli_query($con, "SELECT * FROM manga WHERE id='{$id}'");
+$row = @mysqli_fetch_array($sql);
 $chuxi = $row['chuxi'] ;
 if (!$_POST['submit']) {
 	$name = $row['name'] ;
@@ -70,8 +70,8 @@ if ($_POST['submit']) {
 	if ( $_POST['delete']==1 ) {
 	unset($_SESSION['delmaid2']);
 	$_SESSION['delmaid2'] = $id;
-	$a=mysql_query("DELETE FROM manga WHERE `id`='{$id}'");
-	$b=mysql_query("DELETE FROM chapter WHERE `manga_id`='{$id}'");
+	$a=mysqli_query("DELETE FROM manga WHERE `id`='{$id}'");
+	$b=mysqli_query("DELETE FROM chapter WHERE `manga_id`='{$id}'");
 	if (($a) && ($b)) {
 	$custom_previous = "list";
 	$redirect_info = "Đã xóa truyện thành công.";
@@ -160,7 +160,7 @@ $marKoDau=array("a","a","a","a","a","a","a","a","a","a","a"
 "D");
 $kodau1=str_replace($marTViet,$marKoDau,$name);
 $kodau2=str_replace($marTViet,$marKoDau,$tenkhac);
-	$a=mysql_query("UPDATE `manga` SET 
+	$a=mysqli_query("UPDATE `manga` SET 
 	`status`='{$status}',
 	`name`='{$name}',
 	`tenkhac`='{$tenkhac}',

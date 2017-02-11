@@ -1,4 +1,4 @@
-<?
+<?php
 if ($_GET['way'] == 1) {
 ?>
 <div style="display:none;">
@@ -18,7 +18,7 @@ if ($_GET['way'] == 1) {
 		]
     });
 		</script>
-<?
+<?php
 }
 else {
 ?>
@@ -31,6 +31,6 @@ else {
 </div>         
 		<textarea style="background-color: white; width: 470px; height: 196px;" class="xxlarge" name="noidung"></textarea>
 		<p class="help-block">Nhập link ảnh, mỗi link một dòng. </p>
-<?
+<?php
 }
 ?>

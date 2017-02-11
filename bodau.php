@@ -1,7 +1,7 @@
-<?
+<?php
 require_once('includes/config.php');
-$a=@mysql_query("SELECT id,tenkhac FROM `manga`");
-while ($b=@mysql_fetch_array($a)) {
+$a=@mysqli_query($con, "SELECT id,tenkhac FROM `manga`");
+while ($b=@mysqli_fetch_array($a)) {
 $marTViet=array("à","á","ạ","ả","ã","â","ầ","ấ","ậ","ẩ","ẫ","ă",
 "ằ","ắ","ặ","ẳ","ẵ","è","é","ẹ","ẻ","ẽ","ê","ề"
 ,"ế","ệ","ể","ễ",
@@ -41,7 +41,7 @@ $marKoDau=array("a","a","a","a","a","a","a","a","a","a","a"
 "D");
 $kodau = str_replace($marTViet,$marKoDau,$b['tenkhac']);
 echo $kodau;
-$c=@mysql_query("UPDATE `manga` SET `tenkhackodau`='{$kodau}' WHERE `id`='{$b['id']}'");
+$c=@mysqli_query($con, "UPDATE `manga` SET `tenkhackodau`='{$kodau}' WHERE `id`='{$b['id']}'");
 if ($c) {
 echo "DONE</br>";
 }

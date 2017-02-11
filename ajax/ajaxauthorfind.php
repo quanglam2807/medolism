@@ -45,11 +45,11 @@ $kodau1=str_replace($marTViet,$marKoDau,$_GET['q']);
 if (!$q) {
     return;
 }
-$a = @mysql_query("SELECT DISTINCT name,tenkhac,id FROM manga WHERE upper(namekodau) LIKE '{$q}%' OR upper(namekodau) LIKE '%{$q}' OR upper(namekodau) LIKE '%{$q}%' OR upper(tenkhackodau) LIKE '{$q}%' OR upper(tenkhackodau) LIKE '%{$q}' OR upper(tenkhackodau) LIKE '%{$q}%'");
-while ($b = @mysql_fetch_array( $a )) {
+$a = @mysqli_query($con, "SELECT DISTINCT name,tenkhac,id FROM manga WHERE upper(namekodau) LIKE '{$q}%' OR upper(namekodau) LIKE '%{$q}' OR upper(namekodau) LIKE '%{$q}%' OR upper(tenkhackodau) LIKE '{$q}%' OR upper(tenkhackodau) LIKE '%{$q}' OR upper(tenkhackodau) LIKE '%{$q}%'");
+while ($b = @mysqli_fetch_array( $a )) {
 ?>
-<? echo $b['name']; ?><? if ($b['tenkhac']) { echo " - "; } ?> <? echo $b['tenkhac']; ?>|<? echo $b['id']."\n"; ?>
-<?
+<?php echo $b['name']; ?><?php if ($b['tenkhac']) { echo " - "; } ?> <?php echo $b['tenkhac']; ?>|<?php echo $b['id']."\n"; ?>
+<?php
 }
 ?>
 

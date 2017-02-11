@@ -1,12 +1,12 @@
-<?
+<?php
 session_start();
 $colummn=1;
 require_once('includes/detectlang.php');
 require_once('includes/config.php');
 require_once('includes/getdata.php');
 $id = intval($_GET['id']);
-$sql_viewmanga = @mysql_query("SELECT * FROM manga WHERE id='{$id}'");
-$manga = @mysql_fetch_array( $sql_viewmanga );
+$sql_viewmanga = @mysqli_query($con, "SELECT * FROM manga WHERE id='{$id}'");
+$manga = @mysqli_fetch_array( $sql_viewmanga );
 			$chuxi = $manga['chuxi'];
 			$congtac = $manga['congtac'];
 $no_per = 0;
@@ -14,7 +14,7 @@ $idCheck = explode(";",$congtac);
 for($i=0;$i<count($idCheck);$i++){
 		$idlan=$idCheck[$i];
 if ($no_per==0) {
-		if (!$_SESSION['user_id']) {
+		if (!isset($_SESSION['user_id'])) {
 			$no_per = 0;
 		}
 		else if (( $_SESSION['user_id'] == $chuxi  ) || ( $user['username'] == $idlan ) || ( $user['level'] == 10)) {
@@ -29,8 +29,8 @@ $lang_page_title = $manga['name'];
 if ($manga['tenkhac']) {
 $lang_page_title .= " [".$manga['tenkhac']."]";
 }
-$sql_chuxi = @mysql_query("SELECT id,username FROM members WHERE id='{$manga['chuxi']}'");
-$chuxi = @mysql_fetch_array( $sql_chuxi );
+$sql_chuxi = @mysqli_query($con, "SELECT id,username FROM members WHERE id='{$manga['chuxi']}'");
+$chuxi = @mysqli_fetch_array( $sql_chuxi );
 if (( !$_GET['id'] ) || ( !$manga['name'] )) {
 $redirect_info = "Access denied";
 include_once('templates/redirect.php');
@@ -42,23 +42,23 @@ include_once('templates/header.php');
 <div class="spanspecial">
 <div class="introduce" style="width:660px;">
 <div style="width:650px;" class="page-header">
-			<h2 style="padding-left:10px;"><? echo $manga['name']; ?> <small><? echo $manga['tacgia']; ?><? if ($no_per==1) { ?><a class="btn btn-large btn-primary" href="editmanga?id=<? echo $manga['id']; ?>" style="float:right; ">CHỈNH SỬA</a><? } ?></small></h2>
+			<h2 style="padding-left:10px;"><?php echo $manga['name']; ?> <small><?php echo $manga['tacgia']; ?><?php if ($no_per==1) { ?><a class="btn btn-large btn-primary" href="editmanga?id=<?php echo $manga['id']; ?>" style="float:right; ">CHỈNH SỬA</a><?php } ?></small></h2>
 </div>
 <div style="width:336px; margin-left:154px;" class="thumbnail">
-            <img style="width:336px; height:480px;" src="<? 
+            <img style="width:336px; height:480px;" src="<?php
 if (!$manga['bigimg']) {
 echo "http://placehold.it/336x480";
-} 
+}
 else {
 echo $manga['bigimg'];
 } ?>">
 </div>
-<?
+<?php
 $user_id = $_SESSION['user_id'];
-$sql_query2 = @mysql_query("SELECT COUNT(*) FROM lh WHERE manga_id='{$id}' AND `like`='1'");
-$manga3 = @mysql_fetch_array( $sql_query2 );
-$sql_query3 = @mysql_query("SELECT COUNT(*) FROM lh WHERE manga_id='{$id}' AND `hate`='1'");
-$manga2 = @mysql_fetch_array( $sql_query3 );
+$sql_query2 = @mysqli_query($con, "SELECT COUNT(*) FROM lh WHERE manga_id='{$id}' AND `like`='1'");
+$manga3 = @mysqli_fetch_array( $sql_query2 );
+$sql_query3 = @mysqli_query($con, "SELECT COUNT(*) FROM lh WHERE manga_id='{$id}' AND `hate`='1'");
+$manga2 = @mysqli_fetch_array( $sql_query3 );
 $lcount = $manga3['0'];
 $hcount = $manga2['0'];
 $tong = $hcount + $lcount;
@@ -74,9 +74,9 @@ $ptl = $lcount/$tong*100;
 else {
 $ptl = 0;
 }
-$sql_query4 = @mysql_query("SELECT * FROM lh WHERE manga_id='{$id}' AND user_id='{$user_id}'");
-$manga4 = @mysql_fetch_array( $sql_query4 );
-if (mysql_num_rows($sql_query4) > 0) {
+$sql_query4 = @mysqli_query($con, "SELECT * FROM lh WHERE manga_id='{$id}' AND user_id='{$user_id}'");
+$manga4 = @mysqli_fetch_array( $sql_query4 );
+if (mysqli_num_rows($sql_query4) > 0) {
 if ($manga4['like']==1) {
 $like = 1;
 $hate = 0;
@@ -90,9 +90,9 @@ $like = 0;
 <script type="text/javascript">
 function likehate(a,b)
 {
-<? if (!$_SESSION['user_id']) { ?>
+<?php if (!$_SESSION['user_id']) { ?>
 $("#needtologin").empty().html('<div class="alert fade in" style="width:336px; margin:auto;"><a href="#" data-dismiss="alert" class="close">×</a>Bạn cần phải <a href="login">đăng nhập</a> hoặc <a href="register">đăng ký</a> để tiếp tục.</div>');
-<? } else { ?>
+<?php } else { ?>
 var data5 = 'manga_id='+a+'&lh='+b;
 $("#likehate").empty().html('<div style="width: 50%; margin: 15px auto auto;" class="progress progress-info progress-striped active"><div style="width: 100%" class="bar"></div></div>');
 $.ajax({
@@ -104,101 +104,101 @@ success: function(html){
 $("#likehate").empty().append(html);
 }
 });
-<? } ?>
+<?php } ?>
 }
 </script>
 <div id="likehate">
 <div class="row" style="width: 336px; margin: 20px auto auto;">
-<div style="float: left; width: 230px;">    
+<div style="float: left; width: 230px;">
 <div class="progress progress-striped active">
-<div style="width: <? echo $ptl; ?>%;" class="bar"></div>   
+<div style="width: <?php echo $ptl; ?>%;" class="bar"></div>
 </div></div>
-<div style="float:left; width: 36px; margin-left: 5px; margin-right: 5px; text-align:center;"><? echo $lcount; ?></div>
-<div style="float:left; width: 60px;"><a style="margin-top: -5px;" class="btn btn-primary btn-small <? if ($like==1) { echo "active"; } ?>" onclick="likehate(<? echo $id; ?>,1)">Thích</a></div>
-<div style="float: left; width: 230px;">    
+<div style="float:left; width: 36px; margin-left: 5px; margin-right: 5px; text-align:center;"><?php echo $lcount; ?></div>
+<div style="float:left; width: 60px;"><a style="margin-top: -5px;" class="btn btn-primary btn-small <?php if ($like==1) { echo "active"; } ?>" onclick="likehate(<?php echo $id; ?>,1)">Thích</a></div>
+<div style="float: left; width: 230px;">
 <div class="progress progress-striped progress-danger active">
-<div style="width: <? echo $pth; ?>%;" class="bar"></div>   
+<div style="width: <?php echo $pth; ?>%;" class="bar"></div>
 </div></div>
-<div style="float:left; width: 36px; margin-left: 5px; margin-right: 5px; text-align:center;"><? echo $hcount; ?></div>
-<div style="float:left; width: 60px;"><a style="margin-top: -5px;" class="btn btn-danger btn-small <? if ($hate==1) { echo "active"; } ?>" onclick="likehate(<? echo $id; ?>,2)">Ghét</a></div>
+<div style="float:left; width: 36px; margin-left: 5px; margin-right: 5px; text-align:center;"><?php echo $hcount; ?></div>
+<div style="float:left; width: 60px;"><a style="margin-top: -5px;" class="btn btn-danger btn-small <?php if ($hate==1) { echo "active"; } ?>" onclick="likehate(<?php echo $id; ?>,2)">Ghét</a></div>
 </div>
 </div>
 <div id="needtologin">
 </div>
 <div style="padding:10px;">
-<? if ($manga['tenkhac']) { ?>
+<?php if ($manga['tenkhac']) { ?>
 <div style="padding-top:5px; color:green;">
-<b>Tên khác:</b> <? echo $manga['tenkhac']; ?>
+<b>Tên khác:</b> <?php echo $manga['tenkhac']; ?>
 </div>
-<? } ?>
+<?php } ?>
 <div style="padding-top:5px; color: #0090ff;">
-<b>Tác giả:</b> <? echo $manga['tacgia']; ?>
+<b>Tác giả:</b> <?php echo $manga['tacgia']; ?>
 </div>
 <div style="padding-top:5px; color: #8AB800">
-<b>Tình trạng:</b> 
-<?
+<b>Tình trạng:</b>
+<?php
 if ($manga['status']==1) {
 ?>
 Updating
-<?
-} 
+<?php
+}
 ?>
-<?
+<?php
 if ($manga['status']==2) {
 ?>
 Completed
-<?
-} 
+<?php
+}
 ?>
-<?
+<?php
 if ($manga['status']==3) {
 ?>
 One Shot
-<?
-} 
+<?php
+}
 ?>
-<?
+<?php
 if ($manga['status']==4) {
 ?>
 Drop
-<?
-} 
+<?php
+}
 ?>
 </div>
 <div style="padding-top:5px; color: #660066;">
-<b>Nguồn/Nhóm dịch: </b><? echo $manga['nguon']; ?>
+<b>Nguồn/Nhóm dịch: </b><?php echo $manga['nguon']; ?>
 </div>
 <div style="padding-top:5px; color: #FF0000;">
-<b>Ngày đăng: </b><? echo $manga['ngaydang']; ?>
+<b>Ngày đăng: </b><?php echo $manga['ngaydang']; ?>
 </div>
 <div style="padding-top:5px; color: #ff9600;">
 <b>Thể loại:</b>
-<?
+<?php
 $idCheck2 = explode(",",$manga['cats']);
 for($i=0;$i<count($idCheck2);$i++){
 		$idlan2=$idCheck2[$i];
-		$sql5= @mysql_query("select * from cats where id = $idlan2");
-		$catsne = @mysql_fetch_array( $sql5 );
+		$sql5= @mysqli_query($con, "select * from cats where id = $idlan2");
+		$catsne = @mysqli_fetch_array( $sql5 );
 if ($idlan2!="") {
 ?>
-<? if ($i>0) {?>,<? } ?> <a href="list?id=<? echo $catsne['id']; ?>"><? echo $catsne['name']; ?></a>
-<?
+<?php if ($i>0) {?>,<?php } ?> <a href="list?id=<?php echo $catsne['id']; ?>"><?php echo $catsne['name']; ?></a>
+<?php
 }
 }
 ?>
 </div>
 <div style="padding-top:5px; color: #FF3399;">
-<b>Đăng bởi:</b> <a href="user?username=<? echo $chuxi['username']; ?>"><? echo $chuxi['username']; ?></a>
-<?
+<b>Đăng bởi:</b> <a href="user?username=<?php echo $chuxi['username']; ?>"><?php echo $chuxi['username']; ?></a>
+<?php
 for($i=0;$i<count($idCheck);$i++){
 		$idlan=$idCheck[$i];
-$sql_congtac = @mysql_query("SELECT id,username FROM members WHERE BINARY username='{$idlan}'");
-$ctn = @mysql_fetch_array( $sql_congtac );
+$sql_congtac = @mysqli_query($con, "SELECT id,username FROM members WHERE BINARY username='{$idlan}'");
+$ctn = @mysqli_fetch_array( $sql_congtac );
 if (($idlan!="") && ($idlan!=" ")) {
-if ( @mysql_num_rows( $sql_congtac ) > 0 ) {
+if ( @mysqli_num_rows( $sql_congtac ) > 0 ) {
 ?>
-, <a href="user?username=<? echo $ctn['username']; ?>"><? echo $ctn['username']; ?></a>
-<?
+, <a href="user?username=<?php echo $ctn['username']; ?>"><?php echo $ctn['username']; ?></a>
+<?php
 }
 }
 }
@@ -206,11 +206,11 @@ if ( @mysql_num_rows( $sql_congtac ) > 0 ) {
 </div>
 </div>
 <div class="well" style="margin-top: 10px; width:600px; margin-left: 10px;">
-<? echo $manga['chuthich']; ?>
+<?php echo $manga['chuthich']; ?>
 </div>
 <style>
 .insidechap {
-overflow: auto; 
+overflow: auto;
 max-height: 400px;
 }
 </style>
@@ -231,29 +231,29 @@ $("#myDiv").empty().append(html);
 }
 </script>
 <div id="myDiv">
-<p style="padding-left: 20px;"><b>Sắp xếp:</b> <font style="color: #DA4F49; font-weight: bold;">LỚN NHẤT TRƯỚC</font> || <a onclick="orderby(2,<? echo $id; ?>)">NHỎ NHẤT TRƯỚC</a> || <a onclick="orderby(3,<? echo $id; ?>)">MỚI CẬP NHẬT</a></p>
+<p style="padding-left: 20px;"><b>Sắp xếp:</b> <font style="color: #DA4F49; font-weight: bold;">LỚN NHẤT TRƯỚC</font> || <a onclick="orderby(2,<?php echo $id; ?>)">NHỎ NHẤT TRƯỚC</a> || <a onclick="orderby(3,<?php echo $id; ?>)">MỚI CẬP NHẬT</a></p>
 <table class="table table-striped" style="margin-bottom:0 !important; width: 640px;">
         <thead>
           <tr>
             <th style="width: 100px;">Chapter</th>
             <th style="width: 300px;">Thông tin</th>
             <th style="width: 120px;">Ngày đăng</th>
-<? if ($no_per == 1) { ?>
+<?php if ($no_per == 1) { ?>
             <th style="width: 70px;">Download</th>
 			<th style="width: 50px;">...</th>
-<? } 
+<?php }
 else { ?>
             <th style="width: 120px;">Download</th>
-<? } ?>
-          </tr>	  
+<?php } ?>
+          </tr>
         </thead>
 </table>
 <div class="insidechap">
 <table class="table table-striped" style="width:640px; margin-bottom:0 !important; ">
         <tbody>
-<?
-$sql_chapter = @mysql_query("SELECT * FROM chapter WHERE `manga_id`='{$id}' ORDER BY chap DESC");
-while ($chapter = @mysql_fetch_array( $sql_chapter )) {
+<?php
+$sql_chapter = @mysqli_query($con, "SELECT * FROM chapter WHERE `manga_id`='{$id}' ORDER BY chap DESC");
+while ($chapter = @mysqli_fetch_array( $sql_chapter )) {
 $sochu = strlen($chapter['bosung']);
 if ($sochu>45) {
 $chuthich = substr($chapter['bosung'],0,30)."...";
@@ -261,34 +261,34 @@ $chuthich = substr($chapter['bosung'],0,30)."...";
 else {
 $chuthich = $chapter['bosung'];
 }
-?>	
+?>
           <tr>
-            <td style="width: 100px;"><a href="viewchapter?manga_id=<? echo $id; ?>&chap=<? echo $chapter['chap']; ?>">Chapter <? echo $chapter['chap']; ?></a></td>
-            <td style="width: 300px;"><? echo $chuthich ?></td>
-            <td style="width: 120px;"><? echo $chapter['ngaydang']; ?></td>
-<? if ($no_per == 1) { ?>				
-            <td style="width: 70px;">		
-<? } else { ?>
+            <td style="width: 100px;"><a href="viewchapter?manga_id=<?php echo $id; ?>&chap=<?php echo $chapter['chap']; ?>">Chapter <?php echo $chapter['chap']; ?></a></td>
+            <td style="width: 300px;"><?php echo $chuthich ?></td>
+            <td style="width: 120px;"><?php echo $chapter['ngaydang']; ?></td>
+<?php if ($no_per == 1) { ?>
+            <td style="width: 70px;">
+<?php } else { ?>
             <td style="width: 120px;">
-<? } ?>
-<?
+<?php } ?>
+<?php
 if (!$chapter['download']) {
 echo "Không có";
 }
 else {
 ?>
-<a href="<? echo $chapter['download']; ?>">Download</a>
-<?
+<a href="<?php echo $chapter['download']; ?>">Download</a>
+<?php
 }
- ?>			
+ ?>
 		</td>
-<? if ($no_per == 1) { ?>		
+<?php if ($no_per == 1) { ?>
 		<td>
-		<a href="editchapter?id=<? echo $chapter['id']; ?>" class="btn btn-primary btn-small">SỬA</a>
+		<a href="editchapter?id=<?php echo $chapter['id']; ?>" class="btn btn-primary btn-small">SỬA</a>
 		</td>
-<? } ?>
+<?php } ?>
           </tr>
-<?
+<?php
 }
 ?>
         </tbody>
@@ -296,7 +296,7 @@ else {
 </div>
 </div>
 <hr>
-<div style="width: 650px; padding:10px; margin-top: -18px;  text-align: center;"><a class="btn btn-primary btn-small" href="addchapter?id=<? echo $id; ?>" style="">ĐĂNG CHAPTER MỚI</a><a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-danger btn-small">BÁO TRUYỆN DIE</a>
+<div style="width: 650px; padding:10px; margin-top: -18px;  text-align: center;"><a class="btn btn-primary btn-small" href="addchapter?id=<?php echo $id; ?>" style="">ĐĂNG CHAPTER MỚI</a><a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-danger btn-small">BÁO TRUYỆN DIE</a>
 <a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-success btn-small">XIN CỘNG TÁC</a>
 <a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-inverse btn-small">BÁO CÁO VI PHẠM</a>
 <!-- AddThis Button BEGIN -->
@@ -364,7 +364,7 @@ $("#comment_list").empty().append(html);
 }
 </script>
 <div id="comment_list">
-<?
+<?php
 $_SESSION['user_id'] = 1;
 $page = 1;
 $rows_per_page = 5;
@@ -379,45 +379,45 @@ else {
 $page_start = ( $page - 1 ) * $rows_per_page - $rows_per_page;
 }
 }
-$sql_chapter5 = @mysql_query("SELECT * FROM comments WHERE `manga_id`='{$id}' ORDER BY id LIMIT {$page_start},{$rows_per_page}");
-$sql_chapter6 = @mysql_query("SELECT id FROM comments WHERE `manga_id`='{$id}' ORDER BY id");
-$number_of_page = ceil ( @mysql_num_rows( $sql_chapter6 ) / $rows_per_page ); 
-if (@mysql_num_rows( $sql_chapter6 ) <= 0) {
+$sql_chapter5 = @mysqli_query($con, "SELECT * FROM comments WHERE `manga_id`='{$id}' ORDER BY id LIMIT {$page_start},{$rows_per_page}");
+$sql_chapter6 = @mysqli_query($con, "SELECT id FROM comments WHERE `manga_id`='{$id}' ORDER BY id");
+$number_of_page = ceil ( @mysqli_num_rows( $sql_chapter6 ) / $rows_per_page );
+if (@mysqli_num_rows( $sql_chapter6 ) <= 0) {
 ?>
 <p class="liense" style="padding-bottom: 10px;">Chưa có bình luận nào cả.</p>
-<?
+<?php
 }
 else {
-while ($chapter5 = @mysql_fetch_array( $sql_chapter5 )) {
+while ($chapter5 = @mysqli_fetch_array( $sql_chapter5 )) {
 $user_id5 = $chapter5['user_id'];
 $noidung = $chapter5['noidung'];
-$sql_memdata2 = @mysql_query("SELECT username,avatar,avatartype,sex FROM members WHERE id='{$user_id5}'");
-$user2 = @mysql_fetch_array( $sql_memdata2 );
+$sql_memdata2 = @mysqli_query($con, "SELECT username,avatar,avatartype,sex FROM members WHERE id='{$user_id5}'");
+$user2 = @mysqli_fetch_array( $sql_memdata2 );
 ?>
 <div class="row">
 <div style="float: left; width: 180px; margin-top: -5px; text-align: center;">
 <div style="width: 130px; margin-left: 35px;">
-<a href="user?username=<? echo $user2['username']; ?>" class="thumbnail" ><img src="<? echo avatar($user2['avatartype'],$user2['avatar'],$user2['sex'],130); ?>"></a>
-<a href="user?username=<? echo $user2['username']; ?>" style="line-height: 35px;"><? echo $user2['username']; ?></a>
+<a href="user?username=<?php echo $user2['username']; ?>" class="thumbnail" ><img src="<?php echo avatar($user2['avatartype'],$user2['avatar'],$user2['sex'],130); ?>"></a>
+<a href="user?username=<?php echo $user2['username']; ?>" style="line-height: 35px;"><?php echo $user2['username']; ?></a>
 </div>
 </div>
 <div style="float:left; width: 480px; margin-top:-5px; ">
 <div style="min-height: 70px;" class="well">
 <p>
-<? echo $chapter5['noidung']; ?></p>
+<?php echo $chapter5['noidung']; ?></p>
 </div>
 <div style="margin-top: -10px;">
 <div style="float:right;">
 <input type="submit" value="Trả lời" class="btn btn-primary btn-small" name="submit">
 </div>
 <div style="float:left;">
-<? echo $chapter5['ngaydang']; ?>
+<?php echo $chapter5['ngaydang']; ?>
 </div>
 </div>
 </div>
 </div>
 <hr>
-<?
+<?php
 }
 include_once("includes/pagination.php");
 }
@@ -428,13 +428,13 @@ include_once("includes/pagination.php");
 </div>
 </div>
 <div class="introduce introduce_gray" style="margin-top: 20px; width: 660px;">
-<?
+<?php
 if ($_SESSION['user_id']) {
 ?>
 <div class="row">
 <div style="float: left; width: 180px; margin-top: 15px;">
 <div style="width: 130px; margin-left: 35px;">
-<a href="avatar" class="thumbnail" ><img src="<? echo avatar($user['avatartype'],$user['avatar'],$user['sex'],130); ?>"></a>
+<a href="avatar" class="thumbnail" ><img src="<?php echo avatar($user['avatartype'],$user['avatar'],$user['sex'],130); ?>"></a>
 </div>
 </div>
 <div style="float:left; width: 480px;">
@@ -444,21 +444,21 @@ if ($_SESSION['user_id']) {
 </form>
 </div>
 </div>
-<?
+<?php
 }
 else {
 ?>
 <p class="liense">Bạn cần phải <a class="btn btn-small btn-warning" href="login">Đăng Nhập</a> hoặc <a class="btn btn-small btn-success" href="register">Đăng Ký</a> để gửi bình luận.</p>
-<?
+<?php
 }
 ?>
 </div>
 </div>
 
 
-<?
+<?php
 include_once('templates/sidebar_nonlist.php');
 include_once('templates/footer.php');
 }
 
-?>	
+?>

@@ -1,11 +1,11 @@
-<?
+<?php
 require_once('includes/config.php');
 $getchap = intval($_GET['chap']);
 $getmanga_id = intval($_GET['manga_id']);
-$sql_viewmanga = @mysql_query("SELECT * FROM chapter WHERE manga_id='{$getmanga_id}' AND chap='{$_GET['chap']}'");
-$manga = @mysql_fetch_array( $sql_viewmanga );
-$sql_viewmanga2 = @mysql_query("SELECT name FROM manga WHERE id='{$getmanga_id}'");
-$manga2 = @mysql_fetch_array( $sql_viewmanga2 );
+$sql_viewmanga = @mysqli_query($con, "SELECT * FROM chapter WHERE manga_id='{$getmanga_id}' AND chap='{$_GET['chap']}'");
+$manga = @mysqli_fetch_array( $sql_viewmanga );
+$sql_viewmanga2 = @mysqli_query($con, "SELECT name FROM manga WHERE id='{$getmanga_id}'");
+$manga2 = @mysqli_fetch_array( $sql_viewmanga2 );
 if ($_GET['way']==1) {
 unset($_SESSION['way']);
 $_SESSION['way'] = 1;
@@ -39,7 +39,7 @@ if(url.match('^http://')){
 }
 
 </script>
-<title>Đọc Chapter <? echo $manga['chap'];?> - <? echo $manga2['name']; ?> - Medolism</title>
+<title>Đọc Chapter <?php echo $manga['chap'];?> - <?php echo $manga2['name']; ?> - Medolism</title>
 <style>
 .zoom80 {
 max-width: 80%;
@@ -66,41 +66,41 @@ background: url("image/lazyload-spin.gif") no-repeat scroll center center #EEEEE
           <a href="index" class="brand"><img src="image/logomini.png"></a>
           <div class="nav-collapse">
             <ul class="nav">
-<?
-$sql_chapter = @mysql_query("SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' ORDER by chap+0");
-$sql_min = @mysql_query("SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' ORDER by chap+0 LIMIT 1");
-$sql_max = @mysql_query("SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' ORDER by chap+0 DESC LIMIT 1");
-$min = @mysql_fetch_array( $sql_min );
-$max = @mysql_fetch_array( $sql_max );
+<?php
+$sql_chapter = @mysqli_query($con, "SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' ORDER by chap+0");
+$sql_min = @mysqli_query($con, "SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' ORDER by chap+0 LIMIT 1");
+$sql_max = @mysqli_query($con, "SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' ORDER by chap+0 DESC LIMIT 1");
+$min = @mysqli_fetch_array( $sql_min );
+$max = @mysqli_fetch_array( $sql_max );
 if ($min['0']!=$getchap) {
-$sql_prev = @mysql_query("SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' AND chap<'{$getchap}'ORDER by chap+0 DESC LIMIT 1");
-$prev = @mysql_fetch_array( $sql_prev );
+$sql_prev = @mysqli_query($con, "SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' AND chap<'{$getchap}'ORDER by chap+0 DESC LIMIT 1");
+$prev = @mysqli_fetch_array( $sql_prev );
 ?>
-<li><a href="viewchapter?manga_id=<? echo $getmanga_id; ?>&chap=<? echo $prev['0']; ?>">Chapter Trước</a></li>
-<?
+<li><a href="viewchapter?manga_id=<?php echo $getmanga_id; ?>&chap=<?php echo $prev['0']; ?>">Chapter Trước</a></li>
+<?php
 }
 ?>
 <li><select style="height: 25px !important; line-height: 25px !important; margin-top: 7px; padding: 2px !important;" onchange="document.location.href=this.value"> 
-<?
-while ($chapter = @mysql_fetch_array( $sql_chapter )) {
+<?php
+while ($chapter = @mysqli_fetch_array( $sql_chapter )) {
 ?>			
-  <option <? if ($chapter['chap']==$getchap) { echo "selected"; } ?> value="viewchapter?manga_id=<? echo $getmanga_id; ?>&chap=<? echo $chapter['chap']; ?>">Chapter <? echo $chapter['chap']; ?></option>
-<?
+  <option <?php if ($chapter['chap']==$getchap) { echo "selected"; } ?> value="viewchapter?manga_id=<?php echo $getmanga_id; ?>&chap=<?php echo $chapter['chap']; ?>">Chapter <?php echo $chapter['chap']; ?></option>
+<?php
 }
 ?>
 </select>
 </li>
-<?
+<?php
 if ($max['0']!=$getchap) {
-$sql_next = @mysql_query("SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' AND chap>'{$_GET['chap']}'ORDER by chap+0 LIMIT 1");
-$next = @mysql_fetch_array( $sql_next );
+$sql_next = @mysqli_query($con, "SELECT chap FROM chapter WHERE `manga_id`='{$getmanga_id}' AND chap>'{$_GET['chap']}'ORDER by chap+0 LIMIT 1");
+$next = @mysqli_fetch_array( $sql_next );
 ?>
-<li><a href="viewchapter?manga_id=<? echo $getmanga_id; ?>&chap=<? echo $next['0']; ?>">Chapter Kế</a></li>
-<?
+<li><a href="viewchapter?manga_id=<?php echo $getmanga_id; ?>&chap=<?php echo $next['0']; ?>">Chapter Kế</a></li>
+<?php
 }
 ?>
 <li class="divider-vertical"></li>
-<li><a href="viewmanga?id=<? echo $getmanga_id; ?>">Trở về trang Tổng hợp</a></li>
+<li><a href="viewmanga?id=<?php echo $getmanga_id; ?>">Trở về trang Tổng hợp</a></li>
             </ul>
           </div>
         </div>
@@ -114,11 +114,11 @@ $next = @mysql_fetch_array( $sql_next );
               <h3>Lazyload</h3>
               <p style="text-align: left; height: 100px;">Khi sử dụng chế độ này, các chức năng bổ sung như zoom sẽ được lượt bỏ, và khi bạn trượt tới đâu thì ảnh mới load tới đó. Phù hợp với các bạn có <b>tốc độ mạng chậm</b>.</p>
               <p>
-<? if ($way==1) { ?>
+<?php if ($way==1) { ?>
 			  <a class="btn btn-primary active" href="#">Đang sử dụng</a>  </p>
-<? } else { ?>
-			  <a class="btn btn-primary" href="viewchapter?manga_id=<? echo $getmanga_id; ?>&chap=<? echo $_GET['chap']; ?>&way=1">Sử dụng</a>  </p>
-<? } ?>
+<?php } else { ?>
+			  <a class="btn btn-primary" href="viewchapter?manga_id=<?php echo $getmanga_id; ?>&chap=<?php echo $_GET['chap']; ?>&way=1">Sử dụng</a>  </p>
+<?php } ?>
             </div>
           </div>
 
@@ -127,15 +127,15 @@ $next = @mysql_fetch_array( $sql_next );
             <div class="caption">
               <h3>Power Zoomer</h3>
               <p style="text-align: left; height: 100px;">Khi sử dụng chức năng này, ảnh sẽ được thu nhỏ lại bằng 80% kích cỡ màn hình để bạn không phải "kéo qua kéo lại" và có thêm chức năng zoom khi rê chuột vào ảnh .</p>
-<? if ($way==2) { ?>
+<?php if ($way==2) { ?>
 			  <a class="btn btn-primary active" href="#">Đang sử dụng</a>  </p>
-<? } else { ?>
-			  <a class="btn btn-primary" href="viewchapter?manga_id=<? echo $getmanga_id; ?>&chap=<? echo $_GET['chap']; ?>&way=2">Sử dụng</a>  </p>
-<? } ?>
+<?php } else { ?>
+			  <a class="btn btn-primary" href="viewchapter?manga_id=<?php echo $getmanga_id; ?>&chap=<?php echo $_GET['chap']; ?>&way=2">Sử dụng</a>  </p>
+<?php } ?>
             </div>
           </div>
 </div>
-<?
+<?php
 if ($manga['way']==2) {
 $imagerow = $manga['noidung'];
 }
@@ -154,22 +154,22 @@ if (($idlan != "") && ($idlan != " ")) {
 if ($way==2) {
 ?>
 <div width="100%">
-<img class="zoom zoom80" id="zoom<? echo $i; ?>" src="<? echo $idlan; ?>">
+<img class="zoom zoom80" id="zoom<?php echo $i; ?>" src="<?php echo $idlan; ?>">
 </div> 
-<?
+<?php
 }
 if ($way==1) {
 ?>
 <div width="100%">
-<img class="zoom" id="zoom<? echo $i; ?>" src="image/grey.gif" data-original="<? echo $idlan; ?>">
+<img class="zoom" id="zoom<?php echo $i; ?>" src="image/grey.gif" data-original="<?php echo $idlan; ?>">
 </div> 
-<?
+<?php
 }
 }
 }
 ?>
 </div>
-<? if ($way==1) { ?>
+<?php if ($way==1) { ?>
 <script src="js/jquery.lazyload.js?v=3" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
 jQuery(document).ready(function($) { 
@@ -180,19 +180,19 @@ jQuery(document).ready(function($) {
       });
 })
   </script> 
-<? } ?>
-<? if ($way==2) { ?><script src="js/ddpowerzoomer.js"></script>
+<?php } ?>
+<?php if ($way==2) { ?><script src="js/ddpowerzoomer.js"></script>
 <script type="text/javascript">
-<?
+<?php
 $idCheck = explode("\n",$imagerow);
 for($i=0;$i<count($idCheck);$i++){
 		$idlan=$idCheck[$i];
 if ( $idlan!=" " ) {
 ?>
 jQuery(document).ready(function($){ //fire on DOM ready
- $('#zoom<? echo $i; ?>').addpowerzoom() 
+ $('#zoom<?php echo $i; ?>').addpowerzoom() 
 })
-<?
+<?php
 }
 }
 }

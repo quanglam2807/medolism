@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 require_once('language/'.$usinglang.'/lang_editprofile.php');
@@ -41,7 +41,7 @@ if (isset($_GET["act"])) {
 	if(strlen($_POST['newpass']) < 8) {
       $length2=1;
 	}
-	if (( mysql_num_rows(mysql_query("SELECT email FROM members WHERE email='$newemail'"))>0) && ($newemail != $user['email']))
+	if (( mysqli_num_rows(mysqli_query("SELECT email FROM members WHERE email='$newemail'"))>0) && ($newemail != $user['email']))
     {
 		$mail2_error=1;
     }	
@@ -81,7 +81,7 @@ if (isset($_GET["act"])) {
 	include_once('templates/footer.php');	
 	}
 	else {
-	$a=mysql_query("
+	$a=mysqli_query("
 	UPDATE `{$db_name}`.`members` SET 
 	`password`='{$newpass}',
 	`email`='{$newemail}'

@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 require_once('language/'.$usinglang.'/lang_editprofile.php');
@@ -50,7 +50,7 @@ if (isset($_GET["act"])) {
 	include_once('templates/footer.php');
 	}
 	else {
-	$a=mysql_query("
+	$a=mysqli_query("
 	UPDATE `{$db_name}`.`members` SET 
 	`realname`='{$realname}',
 	`country`='{$country}',

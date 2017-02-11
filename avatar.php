@@ -42,7 +42,7 @@ if ($avaway==0) {
 <div class="caption">
 <h4>AVATAR HIỆN TẠI</h4>
 </div>
-<img src="<? echo avatar($user['avatartype'],$user['avatar'],$user['sex'],250); ?>" style="width:250px;"></div>
+<img src="<?php echo avatar($user['avatartype'],$user['avatar'],$user['sex'],250); ?>" style="width:250px;"></div>
 </div>
 <div style="width:326px;text-align:center;float:left;">
 <a style="width: 250px; margin-left: 38px; margin-bottom:10px;" class="thumbnail" data-toggle="modal" href="#type2">
@@ -64,7 +64,7 @@ if ($avaway==0) {
             </div>
 			<form class="form-horizontal" method="post" action="avatar?act=successful&avaway=2">
             <div class="modal-body">    
-<div class="control-group">                                                                                            	<label>Email Gravatar:</label>                                                                                	<div class="controls docs-input-sizes">                                                                                             		<input type="text" value="<? if ($user['avatartype']==2) { echo $user['avatar']; } ?>" name="avatar">
+<div class="control-group">                                                                                            	<label>Email Gravatar:</label>                                                                                	<div class="controls docs-input-sizes">                                                                                             		<input type="text" value="<?php if ($user['avatartype']==2) { echo $user['avatar']; } ?>" name="avatar">
 <p class="help-block">Nhập email của tài khoản <a href="http://gravatar.com">Gravatar</a> bạn đang sử dụng. </p>                                                                         	</div>                                                                                                          </div>			
 	    </div>
             <div class="modal-footer">
@@ -73,7 +73,7 @@ if ($avaway==0) {
             </div>
 </form>
 </div>
-<?
+<?php
 	include_once('templates/footer.php');
 }
 else {
@@ -81,7 +81,7 @@ if ($avaway==1) {
 if (isset($_GET["act"])) { 
 	if ( $_GET['act'] == "successful" ) {
 $new_avatar = addslashes( $_POST['new_avatar'] );
-$a=mysql_query("
+$a=mysqli_query("
 	UPDATE `{$db_name}`.`members` SET 
 	`avatar`='{$new_avatar}',
 	`avatartype`='1' WHERE `id`='{$_SESSION['user_id']}'
@@ -192,16 +192,16 @@ function check_email($email) {
 <div class="pill-content">
 <div class="active">
 <form class="form-horizontal" method="post" action="avatar?act=successful&avaway=2">
-<div class="control-group">                                                                                            	<label>Email Gravatar:</label>                                                                                	<div class="controls docs-input-sizes">                                                                                             		<input type="text" value="<? if ($user['avatartype']==2) { echo $user['avatar']; } ?>" name="avatar">
+<div class="control-group">                                                                                            	<label>Email Gravatar:</label>                                                                                	<div class="controls docs-input-sizes">                                                                                             		<input type="text" value="<?php if ($user['avatartype']==2) { echo $user['avatar']; } ?>" name="avatar">
 <p class="help-block">Nhập email của tài khoản <a href="http://gravatar.com">Gravatar</a> bạn đang sử dụng. </p>                                                                         	</div>                                                                                                          </div>			</div>
 <div class="form-actions">                                                                                             <input type="submit" value="Cập nhật" class="btn btn-primary" name="submit">                             <button class="btn" type="reset">Hủy</button>                                                          </div>
 </form>
 </div>
-<?
+<?php
 	include_once('templates/footer.php');
 	}
 	else {
-	$a=mysql_query("
+	$a=mysqli_query("
 	UPDATE `{$db_name}`.`members` SET 
 	`avatar`='{$_POST['avatar']}',
 	`avatartype`='2' WHERE `id`='{$_SESSION['user_id']}'
@@ -223,7 +223,7 @@ require_once('templates/redirect.php');
 else {
 ?>
 Access Denied
-<?
+<?php
 }
 }
 }

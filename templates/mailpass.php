@@ -1,4 +1,4 @@
-<?																					
+<?php																					
 echo "<ul class=\"nav nav-tabs\" data-tabs=\"tabs\">";
 echo"<li class=\"firsttabs\"><a href=\"profile\">{$lang_profile}</a></li>";
 echo"<li class=\"active\"><a href=\"#\">{$lang_emailandpass}</a></li>";
@@ -24,7 +24,7 @@ echo "			<div class=\"controls docs-input-sizes\">                              
 echo "				<input type=\"password\" name=\"newpass\" value=\"\">                                                 ";
 ?>
 <p class="help-block">Mật khẩu phải từ 8 ký tự trở lên</p>
-<?
+<?php
 echo "			</div>	                                                                                        ";
 echo "		</div>                                                                                              ";
 echo "		<div class=\"control-group\">                                                                              ";

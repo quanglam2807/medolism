@@ -45,11 +45,11 @@ $kodau1=str_replace($marTViet,$marKoDau,$_GET['q']);
 if (!$q) {
     return;
 }
-$a = @mysql_query("SELECT DISTINCT name,id FROM manga WHERE cats LIKE '{$q}%' OR cats LIKE '%{$q}' OR cats LIKE '%{$q}%' ");
-while ($b = @mysql_fetch_array( $a )) {
+$a = @mysqli_query($con, "SELECT DISTINCT name,id FROM manga WHERE cats LIKE '{$q}%' OR cats LIKE '%{$q}' OR cats LIKE '%{$q}%' ");
+while ($b = @mysqli_fetch_array( $a )) {
 ?>
-<? echo $b['name']; ?><? echo "\n"; ?>
-<?
+<?php echo $b['name']; ?><?php echo "\n"; ?>
+<?php
 }
 ?>
 

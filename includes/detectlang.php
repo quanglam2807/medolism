@@ -1,6 +1,6 @@
 <?php
-if (!$_SESSION['language']) {
-$usinglang = 'vi-vn'; 
+if (!isset($_SESSION['language'])) {
+$usinglang = 'vi-vn';
 }
 else {
 $usinglang = $_SESSION['language'];

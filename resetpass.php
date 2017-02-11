@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 require_once('language/'.$usinglang.'/lang_resetpass.php');
@@ -25,8 +25,8 @@ if ( $_GET['act'] == "do" )
     $email = addslashes( $_POST['email'] );
 	
 	// SQL
-	$sql_query = @mysql_query("SELECT * FROM members WHERE email='{$email}'");
-	$member = @mysql_fetch_array( $sql_query );
+	$sql_query = @mysqli_query($con, "SELECT * FROM members WHERE email='{$email}'");
+	$member = @mysqli_fetch_array( $sql_query );
 	
 	// Check username
 	if (!$resp->is_valid) {
@@ -39,7 +39,7 @@ if ( $_GET['act'] == "do" )
 		$mail_error=1;
     }
 	
-	else if ( @mysql_num_rows( $sql_query ) <= 0 ) {
+	else if ( @mysqli_num_rows( $sql_query ) <= 0 ) {
 		$no_email=1;
 	}				
 	
@@ -65,7 +65,7 @@ if ( $_GET['act'] == "do" )
 			$emailpassword=substr($random_password, 0, 10);
 			//Encrypt $emailpassword in MD5 format for the database
 			$newpassword = md5(md5($emailpassword));
-			$a=mysql_query("UPDATE `{$db_name}`.`members` SET `password` = '{$newpassword}' WHERE `email` = '{$email}' ");	
+			$a=mysqli_query("UPDATE `{$db_name}`.`members` SET `password` = '{$newpassword}' WHERE `email` = '{$email}' ");	
 			if ($a) {
 			$subject = "Mật khẩu mới tại Medolism"; 
 			$message = "

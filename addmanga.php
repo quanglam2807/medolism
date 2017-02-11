@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 $lang_page_title="Đăng truyện";
@@ -71,8 +71,8 @@ if ($_POST['imgmode']==2) {
 $bigimg = $_POST['bigimg'];
 $smallimg = $_POST['smallimg'];
 }
-$new = @mysql_query("SELECT MAX(id) as max FROM `manga`");
-$new = @mysql_fetch_array($new);
+$new = @mysqli_query($con, "SELECT MAX(id) as max FROM `manga`");
+$new = @mysqli_fetch_array($new);
 $new = $new['max']+1;
 $marTViet=array("à","á","ạ","ả","ã","â","ầ","ấ","ậ","ẩ","ẫ","ă",
 "ằ","ắ","ặ","ẳ","ẵ","è","é","ẹ","ẻ","ẽ","ê","ề"
@@ -113,7 +113,7 @@ $marKoDau=array("a","a","a","a","a","a","a","a","a","a","a"
 "D");
 $kodau1=str_replace($marTViet,$marKoDau,$name);
 $kodau2=str_replace($marTViet,$marKoDau,$tenkhac);	
-	$a=mysql_query("INSERT INTO `{$db_name}`.`manga` (`status`, `name`, `tenkhac`, `namekodau`, `tenkhackodau`, `nguon`, `cats`, `chuxi`, `congtac`, `xxx`, `chuthich`, `tacgia`, `bigimg`, `smallimg`, `imgmode`, `ngaydang`) VALUES ('{$status}', '{$name}', '{$tenkhac}', '{$kodau1}', '{$kodau2}', '{$nguon}', '{$theloai}', '{$chuxi}', '{$congtac}', '{$xxx}', '{$chuthich}', '{$tacgia}', '{$bigimg}', '{$smallimg}', '{$_POST['imgmode']}', '{$ngaydang}')");
+	$a=mysqli_query("INSERT INTO `{$db_name}`.`manga` (`status`, `name`, `tenkhac`, `namekodau`, `tenkhackodau`, `nguon`, `cats`, `chuxi`, `congtac`, `xxx`, `chuthich`, `tacgia`, `bigimg`, `smallimg`, `imgmode`, `ngaydang`) VALUES ('{$status}', '{$name}', '{$tenkhac}', '{$kodau1}', '{$kodau2}', '{$nguon}', '{$theloai}', '{$chuxi}', '{$congtac}', '{$xxx}', '{$chuthich}', '{$tacgia}', '{$bigimg}', '{$smallimg}', '{$_POST['imgmode']}', '{$ngaydang}')");
     if ($a) {
 	$custom_previous = "viewmanga?id=".$new;
 	$redirect_info = "Đã đăng truyện thành công, tuy nhiên bạn cần phải đợi xét duyệt từ BQT.";

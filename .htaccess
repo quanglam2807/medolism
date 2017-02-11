@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteBase /
+RewriteBase /medolism
 RewriteRule ^index index.php
 RewriteRule ^list list.php
 RewriteRule ^avatar avatar.php

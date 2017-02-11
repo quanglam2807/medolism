@@ -1,4 +1,4 @@
-<?
+<?php
 echo "<form class=\"form-horizontal\" action=\"register?act=do\" method=\"post\">                                                                             ";
 echo "<div class=\"control-group\">                                                                                                        ";
 echo "	<label>{$lang_username}:</label>                                                                                                  ";
@@ -40,20 +40,20 @@ echo "	<label>{$lang_sex}:</label>                                              
 echo "	<div class=\"controls docs-input-sizes\" >                                                                                                         ";
 ?>
 <div class="btn-group" data-toggle-name="sex" data-toggle="buttons-radio" >
-<button type="button" value="1" class="btn btn-small" data-toggle="button"><? echo $lang_male; ?></button>
-<button type="button" value="2" class="btn btn-small" data-toggle="button"><? echo $lang_female; ?></button>
-<button type="button" value="0" class="btn btn-small btn-primary active" data-toggle="button"><? echo $lang_othersex; ?></button>
+<button type="button" value="1" class="btn btn-small" data-toggle="button"><?php echo $lang_male; ?></button>
+<button type="button" value="2" class="btn btn-small" data-toggle="button"><?php echo $lang_female; ?></button>
+<button type="button" value="0" class="btn btn-small btn-primary active" data-toggle="button"><?php echo $lang_othersex; ?></button>
 </div>
 <input type="hidden" name="sex" value="0" />
-<?
+<?php
 echo "	</div>";
 echo "</div>";                                                                                                                      
 echo "<div class=\"control-group\">                                                                                                        ";
 echo "	<label>{$lang_location}:</label>                                                                                                    ";
 echo "	<div class=\"controls docs-input-sizes\">                                                                                                         ";
 echo "<select name=\"country\" id=\"haha\">                                                                                                       ";
-$sql_country = @mysql_query("SELECT printable_name FROM country");
-while ($country = @mysql_fetch_array( $sql_country )) {
+$sql_country = @mysqli_query($con, "SELECT printable_name FROM country");
+while ($country = @mysqli_fetch_array( $sql_country )) {
 echo "<option value=\"{$country['printable_name']}\">{$country['printable_name']}</option>                                                                          ";
 }
 echo "</select>                                                                                                                     ";
@@ -64,8 +64,8 @@ echo "<div class=\"control-group\">
 	<div class=\"controls docs-input-sizes\">
 <select name=\"timezone\">
 ";
-$sql_timezone = @mysql_query("SELECT * FROM timezone");
-while ($tz = @mysql_fetch_array( $sql_timezone )) {
+$sql_timezone = @mysqli_query($con, "SELECT * FROM timezone");
+while ($tz = @mysqli_fetch_array( $sql_timezone )) {
 echo "<option value=\"{$tz['id']}\">{$tz['name']}</option>                                                                          ";
 }
 echo"

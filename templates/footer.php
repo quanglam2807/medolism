@@ -6,7 +6,7 @@
 <div class="right">  
 Tài trợ bởi <a href="http://netcarevn.com"><img style="height: 65px !important;" src="image/nhataitro.png"></a>                                   				</div>
 			<p>                     
-			<? echo $lang_licenses_footer; ?>
+			<?php echo $lang_licenses_footer; ?>
 			</p>                                  
 		</div>                                      
 	</div>  

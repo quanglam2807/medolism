@@ -13,14 +13,14 @@ if ( !$_SESSION['user_id'] )
         $username = addslashes( $_POST['username'] );
         $password = md5(md5( addslashes( $_POST['password'] ) ));
         // Lấy thông tin của username đã nhập trong table members
-        $sql_query = @mysql_query("SELECT id, username, password, level, realname FROM members WHERE username='{$username}'");
-        $member = @mysql_fetch_array( $sql_query );
+        $sql_query = @mysqli_query($con, "SELECT id, username, password, level, realname FROM members WHERE username='{$username}'");
+        $member = @mysqli_fetch_array( $sql_query );
     	//Cookie
     	//Check error
     	if(!$_POST['username'] || !$_POST['password']){
           $blank_error=1;
     	}
-    	if ( @mysql_num_rows( $sql_query ) <= 0 ) {
+    	if ( @mysqli_num_rows( $sql_query ) <= 0 ) {
     		$user_error=1;
 		}
 		else {

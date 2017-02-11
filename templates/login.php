@@ -1,4 +1,4 @@
-<?
+<?php
 echo "<form class=\"form-horizontal\"action=\"login?act=do\" method=\"post\">                                                        ";
 echo "	<div class=\"control-group\">                                                                              ";
 echo "		<label>{$lang_username}:</label>                                                                        ";

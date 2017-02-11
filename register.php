@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 require_once('language/'.$usinglang.'/lang_register.php');
@@ -58,12 +58,12 @@ if ( $_GET['act'] == "do" )
 		$pass_error=1;
     }
     // Kiểm tra username nay co nguoi dung chua
-    if ( mysql_num_rows(mysql_query("SELECT username FROM members WHERE username='$username'"))>0)
+    if ( mysqli_num_rows(mysqli_query("SELECT username FROM members WHERE username='$username'"))>0)
     {
         $userdup_error=1;
     }	
 	// Kiểm tra email có bị trùng
-    if ( mysql_num_rows(mysql_query("SELECT email FROM members WHERE email='$email'"))>0)
+    if ( mysqli_num_rows(mysqli_query("SELECT email FROM members WHERE email='$email'"))>0)
     {
 		$mail2_error=1;
     }	
@@ -115,10 +115,10 @@ if ( $_GET['act'] == "do" )
 	include_once('templates/footer.php');
 	}
 	else {
-	$a=mysql_query("INSERT INTO `{$db_name}`.`members` (`username`, `password`, `email`, `realname`, `country`, `birthday`, `timezone`, `sex`) VALUES ('{$username}', '{$password}', '{$email}', '{$realname}', '{$country}', '{$birthday}', '{$timezone}', '{$sex}')");
+	$a=mysqli_query("INSERT INTO `{$db_name}`.`members` (`username`, `password`, `email`, `realname`, `country`, `birthday`, `timezone`, `sex`) VALUES ('{$username}', '{$password}', '{$email}', '{$realname}', '{$country}', '{$birthday}', '{$timezone}', '{$sex}')");
     if ($a) {
-	$sql_query = @mysql_query("SELECT id WHERE username='{$username}'");
-    $member = @mysql_fetch_array( $sql_query );
+	$sql_query = @mysqli_query($con, "SELECT id WHERE username='{$username}'");
+    $member = @mysqli_fetch_array( $sql_query );
 	$_SESSION['user_id'] = $member['id'];
 	$redirect_info = $lang_successful_register;
 	$custom_previous = "login";

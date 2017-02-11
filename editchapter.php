@@ -1,12 +1,12 @@
-<?
+<?php
 session_start();
 require_once('includes/detectlang.php');
 require_once('includes/config.php');
 require_once('includes/getdata.php');
 $chapter_id = $_GET['id'];
 $sql2 = "select * from chapter where id = '".$chapter_id."'";
-$rs2 = mysql_query($sql2);
-while($row2 = mysql_fetch_array($rs2)){
+$rs2 = mysqli_query($sql2);
+while($row2 = mysqli_fetch_array($rs2)){
 			$manga_id = $row2['manga_id'];
 if ( !$_POST['submit'] ) {
 			$noidung = $row2['noidung'];
@@ -24,8 +24,8 @@ else {
 }
 }
 $sql3 = "select id,name,chuxi,congtac from manga where id = '".$manga_id."'";
-$rs3 = mysql_query($sql3);
-while($row3 = mysql_fetch_array($rs3)){
+$rs3 = mysqli_query($sql3);
+while($row3 = mysqli_fetch_array($rs3)){
 			$id = $row3['id'];
 			$name = $row3['name'];
 			$chuxi = $row3['chuxi'];
@@ -69,7 +69,7 @@ if (isset($_GET["act"])) {
 	if ( $_POST['delete']==1 ) {
 	unset($_SESSION['delmaid']);
 	$_SESSION['delmaid'] = $manga_id;
-	$a=mysql_query("DELETE FROM chapter WHERE `id`='{$chapter_id}'");
+	$a=mysqli_query("DELETE FROM chapter WHERE `id`='{$chapter_id}'");
 	if ($a) {
 	$custom_previous = "viewmanga?id={$_SESSION['delmaid']}";
 	$redirect_info = "Đã xóa chapter thành công.";
@@ -90,7 +90,7 @@ if (isset($_GET["act"])) {
 	include_once('templates/footer.php');	
 	}
 	else {
-	$a=mysql_query("UPDATE `chapter` SET `chap`='{$chap}',`way`='{$way}',`bosung`='{$bosung}',`download`='{$download}',`noidung`='{$noidung}' WHERE `id`='{$chapter_id}'");
+	$a=mysqli_query("UPDATE `chapter` SET `chap`='{$chap}',`way`='{$way}',`bosung`='{$bosung}',`download`='{$download}',`noidung`='{$noidung}' WHERE `id`='{$chapter_id}'");
 	if ($a) {
 	$custom_previous = "viewmanga?id={$manga_id}";
 	$redirect_info = "Đã sửa chapter thành công.";
