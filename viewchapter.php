@@ -6,13 +6,10 @@ $sql_viewmanga = @mysqli_query($con, "SELECT * FROM chapter WHERE manga_id='{$ge
 $manga = @mysqli_fetch_array( $sql_viewmanga );
 $sql_viewmanga2 = @mysqli_query($con, "SELECT name FROM manga WHERE id='{$getmanga_id}'");
 $manga2 = @mysqli_fetch_array( $sql_viewmanga2 );
-if ($_GET['way']==1) {
-unset($_SESSION['way']);
-$_SESSION['way'] = 1;
-}
-if ($_GET['way']==2) {
-unset($_SESSION['way']);
-$_SESSION['way'] = 2;
+if (isset($_GET['way'])) {
+  if ($_GET['way'] == 1 || $_GET['way'] == 2) {
+    $_SESSION['way'] = $_GET['way'];
+  }
 }
 if ( isset($_SESSION['way']) ) {
 $way = $_SESSION['way'];
@@ -21,7 +18,7 @@ else {
 $way = 2;
 }
 require_once('includes/detectlang.php');
-require_once('includes/getdata.php');	
+require_once('includes/getdata.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml/">
@@ -80,10 +77,10 @@ $prev = @mysqli_fetch_array( $sql_prev );
 <?php
 }
 ?>
-<li><select style="height: 25px !important; line-height: 25px !important; margin-top: 7px; padding: 2px !important;" onchange="document.location.href=this.value"> 
+<li><select style="height: 25px !important; line-height: 25px !important; margin-top: 7px; padding: 2px !important;" onchange="document.location.href=this.value">
 <?php
 while ($chapter = @mysqli_fetch_array( $sql_chapter )) {
-?>			
+?>
   <option <?php if ($chapter['chap']==$getchap) { echo "selected"; } ?> value="viewchapter?manga_id=<?php echo $getmanga_id; ?>&chap=<?php echo $chapter['chap']; ?>">Chapter <?php echo $chapter['chap']; ?></option>
 <?php
 }
@@ -105,7 +102,7 @@ $next = @mysqli_fetch_array( $sql_next );
           </div>
         </div>
       </div>
-   </div> 
+   </div>
 <div style="margin-top: 65px;">
 <div style="width: 500px; margin: auto; height:370px;">
 <div style="width: 230px; background-color:#FFF; float:left;" class="thumbnail">
@@ -142,10 +139,10 @@ $imagerow = $manga['noidung'];
 if ($manga['way']==1) {
 include("includes/simple_html_dom.php");
 $html = str_get_html($manga['noidung']);
-$imagerow = ""; 
+$imagerow = "";
 foreach($html->find('img') as $element) {
 $imagerow .= $element->src . "\n";
-} 
+}
 }
 $idCheck = explode("\n",$imagerow);
 for($i=0;$i<count($idCheck);$i++){
@@ -155,14 +152,14 @@ if ($way==2) {
 ?>
 <div width="100%">
 <img class="zoom zoom80" id="zoom<?php echo $i; ?>" src="<?php echo $idlan; ?>">
-</div> 
+</div>
 <?php
 }
 if ($way==1) {
 ?>
 <div width="100%">
 <img class="zoom" id="zoom<?php echo $i; ?>" src="image/grey.gif" data-original="<?php echo $idlan; ?>">
-</div> 
+</div>
 <?php
 }
 }
@@ -172,14 +169,14 @@ if ($way==1) {
 <?php if ($way==1) { ?>
 <script src="js/jquery.lazyload.js?v=3" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
-jQuery(document).ready(function($) { 
+jQuery(document).ready(function($) {
       $(function() {
           $("img.zoom").lazyload({
 		      effect : "fadeIn"
 		  });
       });
 })
-  </script> 
+  </script>
 <?php } ?>
 <?php if ($way==2) { ?><script src="js/ddpowerzoomer.js"></script>
 <script type="text/javascript">
@@ -190,13 +187,13 @@ for($i=0;$i<count($idCheck);$i++){
 if ( $idlan!=" " ) {
 ?>
 jQuery(document).ready(function($){ //fire on DOM ready
- $('#zoom<?php echo $i; ?>').addpowerzoom() 
+ $('#zoom<?php echo $i; ?>').addpowerzoom()
 })
 <?php
 }
 }
 }
-?>	
+?>
 </script>
 </body>
 </html>

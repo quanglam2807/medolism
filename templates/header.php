@@ -134,7 +134,7 @@ if (isset($column) && $colummn==1) {
 }
 else if (!isset($profilepage)) {
 ?>
-<div class="introduce">
+<div>
 <?php
 }
 else {
