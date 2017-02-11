@@ -1,1 +1,0 @@
-var remainingchac="Ký tự còn lại";

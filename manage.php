@@ -5,14 +5,14 @@ require_once('includes/detectlang.php');
 require_once('includes/config.php');
 require_once('includes/getdata.php');
 $lang_page_title="Quản lý truyện";
-if ($_GET['type']) {
+if (isset($_GET['type'])) {
 $type = $_GET['type'];
 }
 else {
-$type = 1; 
+$type = 1;
 }
 if ( !$_SESSION['user_id'] )
-{ 
+{
 $redirect_info = "Bạn cần phải đăng nhập để tiếp tục";
 $custom_previous = "login";
 $_SESSION['previous'] = "manage";
@@ -46,8 +46,8 @@ if ($type==1) {
 			<th>Thao tác</th>
 <?php
 }
-?> 
-			</tr>	  
+?>
+			</tr>
 </thead>
 <tbody>
 <?php
@@ -62,10 +62,10 @@ $i++;
 		</td>
 <?php
 if ($type==1) {
-?> 
+?>
 		<td>
 			<a href="editmanga?id=<?php echo $manga['id']; ?>" class="btn btn-small btn-primary">SỬA</a>
-			
+
 		</td>
 <?php
 }

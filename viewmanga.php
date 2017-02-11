@@ -455,7 +455,6 @@ else {
 </div>
 </div>
 
-
 <?php
 include_once('templates/sidebar_nonlist.php');
 include_once('templates/footer.php');

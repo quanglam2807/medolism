@@ -7,13 +7,13 @@ $chapter_id = $_GET['id'];
 $sql2 = "select * from chapter where id = '".$chapter_id."'";
 $rs2 = mysqli_query($sql2);
 while($row2 = mysqli_fetch_array($rs2)){
-			$manga_id = $row2['manga_id'];
-if ( !$_POST['submit'] ) {
-			$noidung = $row2['noidung'];
-			$chap = $row2['chap'];
-			$way = $row2['way'];
-			$bosung = $row2['bosung'];
-			$download = $row2['download'];
+	$manga_id = $row2['manga_id'];
+	if ( !$_POST['submit'] ) {
+		$noidung = $row2['noidung'];
+		$chap = $row2['chap'];
+		$way = $row2['way'];
+		$bosung = $row2['bosung'];
+		$download = $row2['download'];
 }
 else {
 	$chap = addslashes( $_POST['chap'] );
@@ -38,7 +38,7 @@ include_once('templates/redirect.php');
 }
 else {
 if ( !$_SESSION['user_id'] )
-{ 
+{
 $redirect_info = "Bạn cần phải đăng nhập để tiếp tục.";
 $_SESSION['previous'] = "addchapter?id={$manga_id}";
 $custom_previous = "login";
@@ -64,7 +64,7 @@ $redirect_info = "Bạn chưa được cấp quyền để đăng chapter ch
 include_once('templates/redirect.php');
 }
 if ($no_per == 1) {
-if (isset($_GET["act"])) { 
+if (isset($_GET["act"])) {
     if ( $_GET['act'] == "do" ) {
 	if ( $_POST['delete']==1 ) {
 	unset($_SESSION['delmaid']);
@@ -79,7 +79,7 @@ if (isset($_GET["act"])) {
 	$custom_previous = "editchapter?id={$chapter_id}";
 	$redirect_info = "Rất tiếc, xóa thất bại, xin vui lòng thử lại!";
 	require_once('templates/redirect.php');
-	}	
+	}
 	}
 	else {
 	if ((!$_POST['chap']) || (!$_POST['noidung'])) {
@@ -87,7 +87,7 @@ if (isset($_GET["act"])) {
 	$error_warn_in = $error_warn_in."<strong>CHÚ Ý:</strong> Bạn cần phải điền đầy đủ các thông tin bắt buộc.<br/>";
 	include_once('templates/header.php');
 	include('templates/editchapter.php');
-	include_once('templates/footer.php');	
+	include_once('templates/footer.php');
 	}
 	else {
 	$a=mysqli_query("UPDATE `chapter` SET `chap`='{$chap}',`way`='{$way}',`bosung`='{$bosung}',`download`='{$download}',`noidung`='{$noidung}' WHERE `id`='{$chapter_id}'");
@@ -101,14 +101,14 @@ if (isset($_GET["act"])) {
 	$redirect_info = "Rất tiếc, sửa chapter mới thất bại. Xin vui lòng thử lại!";
 	require_once('templates/redirect.php');
 	}
-	}	
+	}
 	}
 }
 }
 else {
-include_once("templates/header.php");	
-include_once("templates/editchapter.php");	
-include_once("templates/footer.php");	
+include_once("templates/header.php");
+include_once("templates/editchapter.php");
+include_once("templates/footer.php");
 }
 }
 }

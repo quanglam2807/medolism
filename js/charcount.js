@@ -5,7 +5,7 @@ jQuery.fn.limitMaxlength = function(options){
     onLimit: function(){},
     onEdit: function(){}
   }, options);
-  
+
   // Event handler to limit the textarea
   var onEdit = function(){
     var textarea = jQuery(this);
@@ -13,11 +13,11 @@ jQuery.fn.limitMaxlength = function(options){
 
     if(textarea.val().length > maxlength){
       textarea.val(textarea.val().substr(0, maxlength));
-      
+
       // Call the onlimit handler within the scope of the textarea
       jQuery.proxy(settings.onLimit, this)();
     }
-    
+
     // Call the onEdit handler within the scope of the textarea
     jQuery.proxy(settings.onEdit, this)(maxlength - textarea.val().length);
   }
@@ -30,19 +30,19 @@ jQuery.fn.limitMaxlength = function(options){
 }
 
 $(document).ready(function(){
-  
+
   var onEditCallback = function(remaining){
-    $(this).siblings('.charsRemaining').html(remainingchac + " : " + "<b>"+remaining+"</b>");
-    
+    $(this).siblings('.charsRemaining').html("Ký tự còn lại" + " : " + "<b>"+remaining+"</b>");
+
     if(remaining > 0){
       $(this).css('background-color', 'white');
     }
   }
-  
+
   var onLimitCallback = function(){
     $(this).css('background-color', 'red');
   }
-  
+
   $('textarea[maxlength]').limitMaxlength({
     onEdit: onEditCallback,
     onLimit: onLimitCallback,

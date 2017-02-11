@@ -84,7 +84,6 @@ if ( isset($_SESSION['user_id']) ) {
 							<button class="btn btn-small btn-success active" value="1">Tên truyện</button>
 							<button class="btn btn-small" value="2">Tác giả</button>
 							<button class="btn btn-small" value="3">Thể loại</button>
-							<button class="btn btn-small" value="4">Thành viên</button>
 						</div>
 							<div class="search_inside">
 								<div id="search_box">

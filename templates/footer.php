@@ -1,15 +1,8 @@
-		</div>                                  	                                                                                                                                                
-	</div>												
-</div>																																															
-	<div id="footer">                            
-		<div class="container2">                                              
-<div class="right">  
-Tài trợ bởi <a href="http://netcarevn.com"><img style="height: 65px !important;" src="image/nhataitro.png"></a>                                   				</div>
-			<p>                     
-			<?php echo $lang_licenses_footer; ?>
-			</p>                                  
-		</div>                                      
-	</div>  
+		</div>
+	</div>
+</div>
+	<div id="footer">
+	</div>
 <script src="js/fileinput/js/enhance.min.js" type="text/javascript"></script>
 <script src="js/fileinput/js/fileinput.jquery.js" type="text/javascript"></script>
 <script>
@@ -28,7 +21,5 @@ $("#chosesearch button").click(function () {
 	$("#topmenu_search_query").attr("placeholder", placeholder);
 });
 // ĐOẠN 2
-</script>	
-</body>   
-
-                                          
+</script>
+</body>
