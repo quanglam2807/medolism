@@ -1,5 +1,5 @@
 <?php
-require_once('../includes/config.php'); 
+require_once('../includes/config.php');
 $ft = $_GET['ft'];
 $id = $_GET['id'];
 $page = intval($_GET['page']);
@@ -89,15 +89,15 @@ $sql_count = @mysqli_query($con, "SELECT COUNT(*) FROM chapter WHERE manga_id='{
 $count = @mysqli_fetch_array( $sql_count );
 $sql_count2 = @mysqli_query($con, "SELECT COUNT(*) FROM comments WHERE manga_id='{$manga['id']}'");
 $count2 = @mysqli_fetch_array( $sql_count2 );
-?>		
-			
+?>
+
 		<div class="introduce" style="width: 660px !important;">
 			<div class="row">
 			<div style="width:175px; margin-left: 30px; padding-bottom: 10px; float:left">
 				<a class="thumbnail" href="viewmanga?id=<?php echo $manga['id']; ?>">
 					<img src="<?php echo $manga_anhbia; ?>" class="tn123">
 				</a>
-			</div>	
+			</div>
 			<div style="float:left; margin-left:10px;">
 			<div class="page-header" style="width:455px;">
 			<h3><a href="viewmanga?id=<?php echo $manga['id']; ?>"><?php echo $name; ?></a>  <small><?php echo $manga['tacgia']; ?></small></h3>
@@ -108,14 +108,14 @@ if ($manga['status']==1) {
 			<font class="mangastatus mangastatus-primary">Updating: Chapter <?php echo $max['0']; ?></font>
 <?php
 }
-?>	
+?>
 <?php
 if ($manga['status']==2) {
 ?>
 			<font class="mangastatus mangastatus-success">Complete: <?php echo $count['0']; ?> chapters</font>
 <?php
 }
-?>	
+?>
 <?php
 if ($manga['status']==3) {
 ?>
@@ -131,7 +131,7 @@ if ($manga['status']==4) {
 }
 if ($manga['xxx']>=16) {
 ?>
-			<font class="mangastatus mangastatus-danger">Dành cho lứa tuổi <?php echo $manga['xxx']; ?>+</font>	
+			<font class="mangastatus mangastatus-danger">Dành cho lứa tuổi <?php echo $manga['xxx']; ?>+</font>
 <?php
 }
 ?>
@@ -142,22 +142,22 @@ if ($manga['xxx']>=16) {
 			</div>
 <script type="text/javascript">
     $("[rel=tooltip]").tooltip();
-</script>		
-		<div class="form-actions" style="margin-top: 0 !important;">           
+</script>
+		<div class="form-actions" style="margin-top: 0 !important;">
 		<div style="clear:both;padding-bottom:5px;">
 		<div style="float:left;width:250px;"><i class="icon-user"></i> <a href="user?username=<?php echo $chuxi['username']; ?>"><?php echo $chuxi['username']; ?></a>
 		</div>
 		<div style="float:left;width:250px;"><i class="icon-comment"></i> <?php echo $count2['0']; ?> bình luận</div>
 		<div style="float:left;"><i class="icon-picture"></i> <?php echo $count['0']; ?> chapters</div>
 		</div>
-		<br/><b>Thể loại:</b> 
+		<br/><b>Thể loại:</b>
 <?php
 $idCheck = explode(",",$manga['cats']);
 for($i=0;$i<count($idCheck);$i++){
 		$idlan=$idCheck[$i];
 		$sql5= @mysqli_query($con, "select * from cats where id = $idlan");
 		$catsne = @mysqli_fetch_array( $sql5 );
-if ($idlan!="") {		
+if ($idlan!="") {
 ?>
 <?php if ($i>0) {?>, <?php } ?><a href="list?id=<?php echo $catsne['id']; ?>"><?php echo $catsne['name']; ?></a>
 <?php

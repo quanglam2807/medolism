@@ -296,23 +296,7 @@ else {
 </div>
 </div>
 <hr>
-<div style="width: 650px; padding:10px; margin-top: -18px;  text-align: center;"><a class="btn btn-primary btn-small" href="addchapter?id=<?php echo $id; ?>" style="">ĐĂNG CHAPTER MỚI</a><a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-danger btn-small">BÁO TRUYỆN DIE</a>
-<a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-success btn-small">XIN CỘNG TÁC</a>
-<a style="margin-left: 10px;" href="editmanga?id=13" class="btn btn-inverse btn-small">BÁO CÁO VI PHẠM</a>
-<!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style addthis_32x32_style" style="text-align: center; margin-top: 5px; margin-left: 150px;">
-<a class="addthis_button_facebook"></a>
-<a class="addthis_button_twitter"></a>
-<a class="addthis_button_google"></a>
-<a class="addthis_button_linkedin"></a>
-<a class="addthis_button_pinterest"></a>
-<a class="addthis_button_tumblr"></a>
-<a class="addthis_button_blogger"></a>
-<a class="addthis_button_zingme"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
-</div>
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f92b5c429b0ac5c"></script>
+<div style="width: 650px; padding:10px; margin-top: -18px;  text-align: center;"><a class="btn btn-primary btn-small" href="addchapter?id=<?php echo $id; ?>" style="">ĐĂNG CHAPTER MỚI</a>
 </div>
 
 </div>

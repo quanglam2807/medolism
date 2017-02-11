@@ -19,7 +19,7 @@ include_once('templates/redirect.php');
 }
 else {
 if ( !$_SESSION['user_id'] )
-{ 
+{
 $redirect_info = "Bạn cần phải đăng nhập để tiếp tục.";
 $_SESSION['previous'] = "addchapter?id={$manga_id}";
 $custom_previous = "login";
@@ -43,7 +43,7 @@ $redirect_info = "Bạn chưa được cấp quyền để đăng chapter ch
 include_once('templates/redirect.php');
 }
 if ($no_per == 1) {
-if (isset($_GET["act"])) { 
+if (isset($_GET["act"])) {
     if ( $_GET['act'] == "do" ) {
 	$chap = addslashes( $_POST['chap'] );
 	$bosung = addslashes( $_POST['bosung'] );
@@ -56,7 +56,7 @@ if (isset($_GET["act"])) {
 	$error_warn_in = $error_warn_in."<strong>CHÚ Ý:</strong> Bạn cần phải điền đầy đủ các thông tin bắt buộc.<br/>";
 	include_once('templates/header.php');
 	include('templates/addchapter.php');
-	include_once('templates/footer.php');	
+	include_once('templates/footer.php');
 	}
 	else {
 	$a=mysqli_query("INSERT INTO `chapter` (`chap`, `way`, `manga_id`, `ngaydang`, `bosung`, `download`, `noidung`) VALUES ('{$chap}', '{$way}', '{$manga_id}', '{$ngaydang}', '{$bosung}', '{$download}', '{$noidung}');");
@@ -70,14 +70,14 @@ if (isset($_GET["act"])) {
 	$custom_previous = "addchapter?act=do&id={$_GET['id']}";
 	$redirect_info = "Rất tiếc, đăng chapter mới thất bại. Xin vui lòng thử lại!";
 	require_once('templates/redirect.php');
-	}	
+	}
 	}
 }
 }
 else {
-include_once("templates/header.php");	
-include_once("templates/addchapter.php");	
-include_once("templates/footer.php");	
+include_once("templates/header.php");
+include_once("templates/addchapter.php");
+include_once("templates/footer.php");
 }
 }
 }
