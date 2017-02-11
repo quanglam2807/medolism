@@ -47,38 +47,17 @@
 <?php
 if (!isset($_SESSION['user_id'])) {
 ?>
-    <li class="dropdown" id="menu"><a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="icon-lock icon-white"></i> Đăng nhập <b class="caret"></b></a>
-<ul class="dropdown-menu" style="width: 222px;">
-<form method="post" action="login?act=do">
-<li><p>Tên đăng nhập:</p></li>
-<li><input type="text" style="margin-left: 15px; width: 185px;" name="username"></li>
-<li><p>Mật khẩu:</p></li>
-<li><input type="password" style="margin-left: 15px; width: 185px;" name="password"></li>
-<li>
-<div style="float:left;margin-left: 0px;">
-<p style="margin-top: 7px;"><input type="checkbox" name="remember"> Ghi nhớ</p>
-</div>
-<div style="float:right;margin-right: 10px;"><input type="submit" style="margin-left: 15px; margin-bottom: 10px; padding: 7px;" class="btn btn-primary" value="Đăng nhập" name="submit">
-</div>
-</li>
-<li><a href="resetpass">Bạn quên mật khẩu?</a></li>
-</form>
-</ul>
-</li>
-    <li><a href="register"><i class="icon-pencil icon-white"></i> Đăng ký</a></li>
+  <li><a href="login"><i class="icon-pencil icon-white"></i> Đăng nhập với Facebook</a></li>
 <?php
 }
 else {
 ?>
     <li class="dropdown" id="info">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#info">
-    <?php echo $user['realname']; ?>
+    <?php echo $user['username']; ?>
     <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-    <li><a href="profile">Thay đổi hồ sơ</a></li>
-    <li><a href="mailpass">Thay đổi mật khẩu & email</a></li>
-    <li><a href="avatar">Thay đổi avatar</a></li>
 	<li><a href="manage">Quản lý truyện</a></li>
     <li class="divider"></li>
     <li><a href="logout">Thoát</a></li>
