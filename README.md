@@ -8,7 +8,5 @@ Following these steps to install Medolism:
   1. Copy all the sources to where you want to install.
   2. Import sql/2012-07-06_09-34-00.sql to a MySQL database.
   3. Edit includes/config.php with your MySQL database information.
-  
-And it's done and then you can anything you want to fit your needs.
 
-Sorry for my poor English.
+And it's done and then you can anything you want to fit your needs.

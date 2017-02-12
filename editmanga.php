@@ -154,7 +154,7 @@ if (!isset($_SESSION['user_id'])) {
 				);
 				$kodau1=str_replace($marTViet, $marKoDau, $name);
 				$kodau2=str_replace($marTViet, $marKoDau, $tenkhac);
-				$a=mysqli_query(
+				$a=mysqli_query($con, 
 					"UPDATE `manga` SET
 						`status`='{$status}',
 						`name`='{$name}',

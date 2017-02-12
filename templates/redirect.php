@@ -12,7 +12,6 @@ $previous_page = $_SESSION['previous'];
 else {
 $previous_page = $custom_previous;
 }
-require_once('language/'.$usinglang.'/lang_redirect.php');
 echo "<html>																																															";
 echo "	<head>                                                                                                                                                                                          ";
 echo "		<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />";
@@ -28,8 +27,8 @@ echo "
               <h3>Redirect...</h3>
             </div>
             <div class='modal-body'>
-              <p>{$redirect_info}</p>    
-			  <p>{$lang_redirect_in}</p>			  
+              <p>{$redirect_info}</p>
+			  <p>{$lang_redirect_in}</p>
             </div>
             <div class='modal-footer'>
               <a href='{$previous_page}' class='btn'>{$lang_click_here_if_not_redirect}</a>
