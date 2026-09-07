@@ -1,0 +1,1 @@
+var remainingchac="Characters remaining";

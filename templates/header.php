@@ -23,7 +23,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="js/jquery.ui.totop.js" type="text/javascript"></script>
 <script src="js/charcount.js"></script>
-<script src="jslang/<?php echo $usinglang; ?>.js"></script>
+<script src="jslang/vi-vn.js"></script>
 <script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="js/selectmenu.js"></script>
 <script type="text/javascript" src="js/jquery.autocomplete.js"></script>

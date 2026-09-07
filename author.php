@@ -7,7 +7,7 @@ require_once('includes/detectlang.php');
 require_once('includes/getdata.php');
 include_once('templates/header.php');
 $sql = "SELECT id,name,tenkhac,status FROM `manga` WHERE `tacgia`='{$authorname}'"; 
-$a = @mysqli_query($sql);
+$a = @mysqli_query($con, $sql);
 ?>
 <div class="spanspecial introduce" style="width:660px;">
 <table class="table table-striped">

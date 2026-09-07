@@ -1,0 +1,36 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html/medolism   # live-edit the PHP without rebuilding
+    environment:
+      DB_HOST: db
+      DB_NAME: test
+      DB_USER: root
+      DB_PASS: medolism
+      PAGE_URL: http://localhost:8080/medolism
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.6
+    environment:
+      MARIADB_DATABASE: test
+      MARIADB_ROOT_PASSWORD: medolism
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mariadb.cnf:/etc/mysql/conf.d/medolism.cnf:ro
+      # Run once on first start, in order: import the 2012 dump, then repair its encoding.
+      - ./sql/2012-07-06_09-34-00.sql:/docker-entrypoint-initdb.d/01-dump.sql:ro
+      - ./docker/02-fix-encoding.sql:/docker-entrypoint-initdb.d/02-fix-encoding.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  dbdata:

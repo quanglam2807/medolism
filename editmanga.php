@@ -63,8 +63,8 @@ if (!isset($_SESSION['user_id'])) {
 			if ( $_POST['delete']==1 ) {
 				unset($_SESSION['delmaid2']);
 				$_SESSION['delmaid2'] = $id;
-				$a=mysqli_query("DELETE FROM manga WHERE `id`='{$id}'");
-				$b=mysqli_query("DELETE FROM chapter WHERE `manga_id`='{$id}'");
+				$a=mysqli_query($con, "DELETE FROM manga WHERE `id`='{$id}'");
+				$b=mysqli_query($con, "DELETE FROM chapter WHERE `manga_id`='{$id}'");
 				if (($a) && ($b)) {
 					$custom_previous = "list";
 					$redirect_info = "Đã xóa truyện thành công.";

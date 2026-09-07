@@ -16,7 +16,7 @@ echo "<html>																																															";
 echo "	<head>                                                                                                                                                                                          ";
 echo "		<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />";
 echo "		<meta HTTP-EQUIV=\"REFRESH\" content=\"1000000000000000000; url={$previous_page}\">";
-echo "		<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/bootstrap.min2.0.2.css\" />   ";
+echo "		<link rel=\"stylesheet\" type=\"text/css\" href=\"templates/bootstrap.min2.0.3.css\" />   ";
 echo "		<title>Medolism - {$lang_page_title}</title>                                                                                                                      ";
 echo "	</head>                                                                                                                                                                                         ";
 echo " 	<body>";

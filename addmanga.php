@@ -113,7 +113,7 @@ $marKoDau=array("a","a","a","a","a","a","a","a","a","a","a"
 "D");
 $kodau1=str_replace($marTViet,$marKoDau,$name);
 $kodau2=str_replace($marTViet,$marKoDau,$tenkhac);	
-	$a=mysqli_query("INSERT INTO `{$db_name}`.`manga` (`status`, `name`, `tenkhac`, `namekodau`, `tenkhackodau`, `nguon`, `cats`, `chuxi`, `congtac`, `xxx`, `chuthich`, `tacgia`, `bigimg`, `smallimg`, `imgmode`, `ngaydang`) VALUES ('{$status}', '{$name}', '{$tenkhac}', '{$kodau1}', '{$kodau2}', '{$nguon}', '{$theloai}', '{$chuxi}', '{$congtac}', '{$xxx}', '{$chuthich}', '{$tacgia}', '{$bigimg}', '{$smallimg}', '{$_POST['imgmode']}', '{$ngaydang}')");
+	$a=mysqli_query($con, "INSERT INTO `{$db_name}`.`manga` (`status`, `name`, `tenkhac`, `namekodau`, `tenkhackodau`, `nguon`, `cats`, `chuxi`, `congtac`, `xxx`, `chuthich`, `tacgia`, `bigimg`, `smallimg`, `imgmode`, `ngaydang`) VALUES ('{$status}', '{$name}', '{$tenkhac}', '{$kodau1}', '{$kodau2}', '{$nguon}', '{$theloai}', '{$chuxi}', '{$congtac}', '{$xxx}', '{$chuthich}', '{$tacgia}', '{$bigimg}', '{$smallimg}', '{$_POST['imgmode']}', '{$ngaydang}')");
     if ($a) {
 	$custom_previous = "viewmanga?id=".$new;
 	$redirect_info = "Đã đăng truyện thành công, tuy nhiên bạn cần phải đợi xét duyệt từ BQT.";
