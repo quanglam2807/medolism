@@ -2,7 +2,7 @@
 RewriteEngine on
 RewriteBase /medolism
 RewriteRule ^index index.php
-RewriteRule ^list list.php
+RewriteRule ^list index.php
 RewriteRule ^avatar avatar.php
 RewriteRule ^licenses licenses.php
 RewriteRule ^login login.php

@@ -5,7 +5,7 @@ require_once('includes/config.php');
 require_once('includes/getdata.php');
 $manga_id = $_GET['id'];
 $sql2 = "select id,name,chuxi,congtac from manga where id = '".$manga_id."'";
-$rs2 = mysqli_query($sql2);
+$rs2 = mysqli_query($con, $sql2);
 while($row2 = mysqli_fetch_array($rs2)){
 			$id = $row2['id'];
 			$name = $row2['name'];
@@ -59,8 +59,8 @@ if (isset($_GET["act"])) {
 	include_once('templates/footer.php');
 	}
 	else {
-	$a=mysqli_query("INSERT INTO `chapter` (`chap`, `way`, `manga_id`, `ngaydang`, `bosung`, `download`, `noidung`) VALUES ('{$chap}', '{$way}', '{$manga_id}', '{$ngaydang}', '{$bosung}', '{$download}', '{$noidung}');");
-	$b=mysqli_query("UPDATE `manga` SET `chapter_id`=(SELECT id FROM chapter ORDER BY id DESC LIMIT 1) WHERE `id`='{$manga_id}';");
+	$a=mysqli_query($con, "INSERT INTO `chapter` (`chap`, `way`, `manga_id`, `ngaydang`, `bosung`, `download`, `noidung`) VALUES ('{$chap}', '{$way}', '{$manga_id}', '{$ngaydang}', '{$bosung}', '{$download}', '{$noidung}');");
+	$b=mysqli_query($con, "UPDATE `manga` SET `chapter_id`=(SELECT id FROM chapter ORDER BY id DESC LIMIT 1) WHERE `id`='{$manga_id}';");
 	if (($a) && ($b)) {
 	$custom_previous = "viewmanga?id={$manga_id}";
 	$redirect_info = "Đã đăng chapter mới thành công.";

@@ -256,7 +256,7 @@ $sql_chapter = @mysqli_query($con, "SELECT * FROM chapter WHERE `manga_id`='{$id
 while ($chapter = @mysqli_fetch_array( $sql_chapter )) {
 $sochu = strlen($chapter['bosung']);
 if ($sochu>45) {
-$chuthich = substr($chapter['bosung'],0,30)."...";
+$chuthich = mb_substr($chapter['bosung'],0,30)."...";
 }
 else {
 $chuthich = $chapter['bosung'];

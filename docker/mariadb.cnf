@@ -1,0 +1,7 @@
+# The 2012 dump contains a single ~100 MB INSERT for the chapter table, far above
+# the 16M default packet size. Raised for the server and for the import client.
+[mysqld]
+max_allowed_packet = 256M
+
+[client]
+max_allowed_packet = 256M

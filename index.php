@@ -117,14 +117,14 @@ $manga_anhbia = $manga['smallimg'];
 }
 $sochu = strlen($manga['chuthich']);
 if ($sochu>300) {
-$chuthich = substr($manga['chuthich'],0,400)."........";
+$chuthich = mb_substr($manga['chuthich'],0,400)."........";
 }
 else {
 $chuthich = $manga['chuthich'];
 }
 $sochu2 = strlen($manga['name']);
 if ($sochu2>35) {
-$name = substr($manga['name'],0,35)."...";
+$name = mb_substr($manga['name'],0,35)."...";
 }
 else {
 $name = $manga['name'];
